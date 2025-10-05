@@ -61,7 +61,7 @@ import java.util.Scanner ;
  *     <li>renamed class from {@code GroceryBagger} to {@code BagIt}
  *     </ul>
  * 
- * @author Your Name                                    // TODO
+ * @author Samaksh Ghai                                    // TODO
  * 
  * @version 3.1 2025-06-05 complete the implementation  // TODO
  * 
@@ -172,24 +172,33 @@ public final class BagIt
             
             // TODO implement this - set baggedIn to reference the bag which accepted the item
             // TODO baggingArea is iterable so use an enhanced for/foreach loop
-
+            for(GroceryBag bag : baggingArea) {
+            	if (bag.add(item)) {
+            		baggedIn = bag;
+            		break;
+            	}
+            }
+            
+            if(baggedIn == null) {
+            	GroceryBag newBag = new GroceryBag();
+            	baggingArea.add(newBag);
+            	newBag.add(item);
+            	baggedIn = newBag;
+            }
+            
 
             
-            if ( baggedIn == null )
-                {
+            if ( baggedIn == null ) {
                 // couldn't add the item to an already open bag so add it to a new one
                 final GroceryBag newBag = new GroceryBag() ;
                 System.out.printf( "Opened bag %,d%n", newBag.bagId ) ;
 
                 
-                // TODO implement this
-
-                // TODO if the baggingArea doesn't accept the bag, throw a BaggingException
-                
-                // TODO if the newBag doesn't accept the item, throw a BaggingException
-
-
-                }
+             // TODO implement this 
+             // TODO if the baggingArea doesn't accept the bag, throw a BaggingException 
+             // TODO if the newBag doesn't accept the item, throw a BaggingException
+               
+            }
 
             // assertion: the grocery item was bagged in the grocery bag referenced by baggedIn
             
