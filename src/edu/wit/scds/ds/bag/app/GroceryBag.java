@@ -261,26 +261,26 @@ public final class GroceryBag implements Comparable<GroceryBag>
 
         // filter out incompatible items
         
-        // rule 1: 
+        // rule 1: Breakable items can't go with heavy items.
         
         // TODO implement this
         
         
-        // rule 2: 
+        // rule 2: Soft items cant go with rigid items.
         
         // TODO implement this
         
         
-        // rule 3: 
+        // rule 3: Flexible items cant go with hard items.
         
         // TODO implement this
         
         
-        // rule 4: 
+        // rule 4: Perishables cant go with extra large items.
         
         // TODO implement this
-
-        
+        //hidden rule dont use
+        // rule 5: light items cant go with heavy items
         // NOTE do not modify the rest of this method
 
         // nothing else to check - passed all compatibility filters
