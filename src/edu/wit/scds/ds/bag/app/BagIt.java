@@ -170,22 +170,14 @@ public final class BagIt
             // find a bag to put it in and do so
 
             
-            // TODO implement this - set baggedIn to reference the bag which accepted the item
-            // TODO baggingArea is iterable so use an enhanced for/foreach loop
+            // TODO implement this - set baggedIn to reference the bag which accepted the item. DONE
+            // TODO baggingArea is iterable so use an enhanced for/foreach loop. DONE
             for(GroceryBag bag : baggingArea) {
             	if (bag.add(item)) {
             		baggedIn = bag;
             		break;
             	}
             }
-            
-            if(baggedIn == null) {
-            	GroceryBag newBag = new GroceryBag();
-            	baggingArea.add(newBag);
-            	newBag.add(item);
-            	baggedIn = newBag;
-            }
-            
 
             
             if ( baggedIn == null ) {
@@ -195,18 +187,27 @@ public final class BagIt
 
                 
              // TODO implement this 
-             // TODO if the baggingArea doesn't accept the bag, throw a BaggingException 
-             // TODO if the newBag doesn't accept the item, throw a BaggingException
-               
+                	baggingArea.add(newBag);
+             // TODO if the baggingArea doesn't accept the bag, throw a BaggingException. DONE
+                	if(!baggingArea.contains(newBag)) {
+                		throw new BaggingException("Bagging area did not accept new bag.");
+                	}
+             // TODO if the newBag doesn't accept the item, throw a BaggingException. DONE
+                	boolean added = newBag.add(item);
+                	if(!added) {
+                		throw new BaggingException("Bag couldn't accept item.");
+                	}
             }
+               
+            
 
             // assertion: the grocery item was bagged in the grocery bag referenced by baggedIn
             
             // TODO once you are setting baggedIn, delete the conditional test but not the body
             // - this condition will always be false until you implement the TODOs above
             // - then it will always be true - ignore the warnings regarding null comparisons
-            if ( baggedIn != null )
-                {   // TODO delete up to and including this line
+ 
+                   // TODO delete up to and including this line. DONE
                 
             System.out.printf( "  Added %s to bag %,d%n",
                                item.name,
@@ -229,8 +230,7 @@ public final class BagIt
                 shoppingCart.add( baggedIn ) ;
                 }
                 
-                // TODO when you delete the if statement above, delete the next line too
-                }   // end if
+                // TODO when you delete the if statement above, delete the next line too. DONE
 
             }   // end while()
         
