@@ -46,7 +46,7 @@ import java.util.Scanner ;
 /**
  * Driver for the Grocery Bagger application.
  * 
- * @author David M Rosenberg 
+ * @author David M Rosenberg
  * 
  * @version 1.0 2017-05-23 Initial implementation
  * @version 1.1 2020-02-09
