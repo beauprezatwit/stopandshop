@@ -75,9 +75,9 @@ import java.util.Objects ;
  *     <li>strip out pieces for students to implement
  *     </ul>
  * 
- * @author Your Name                                    // TODO
+ * @author Zach Beaupre                                   // DONE
  * 
- * @version 4.1 2025-06-05 complete the implementation  // TODO
+ * @version 4.1 2025-06-05 complete the implementation  // DONE  
  * 
  * @since 1.0
  */
@@ -212,7 +212,7 @@ public final class GroceryBag implements Comparable<GroceryBag>
 
 
     // @formatter:off
-    // TODO in the Javadoc comment, replace "rule 1", etc. with your rules (keep them brief)
+    // DONE in the Javadoc comment, replace "rule 1", etc. with your rules (keep them brief)
     //          (e.g., "don't bag perishables with non-perishables")
     //
     // NOTE edit the comment block carefully!
@@ -232,10 +232,10 @@ public final class GroceryBag implements Comparable<GroceryBag>
      * <p>
      * our heuristics are:
      * <ul>
-     * <li>rule 1: 
-     * <li>rule 2: 
-     * <li>rule 3: 
-     * <li>rule 4: 
+     * <li>rule 1: Breakable items can't go with heavy items.
+     * <li>rule 2: Soft items can't go with hard items.
+     * <li>rule 3: Breakable items can't go with hard items.
+     * <li>rule 4: Perishables can't go with large items.
      * </ul>
      * <p>
      * note: these checks are bi-directional
@@ -250,10 +250,9 @@ public final class GroceryBag implements Comparable<GroceryBag>
         {
 
         checkIntegrity() ;
-
+//i think its done idk
         // there can't be any compatibility issues with an empty grocery bag
-        if ( isEmpty() )
-            {
+        if ( isEmpty() ){
             return true ;
             }
 
@@ -263,27 +262,29 @@ public final class GroceryBag implements Comparable<GroceryBag>
         
         // rule 1: Breakable items can't go with heavy items.
         
-        // TODO implement this
+        // DONE implement this
+        if(candidateItem.isBreakable && hasHeavyItems() || candidateItem.isHeavy && hasBreakableItems()) { return false; }
+        
+        // rule 2: Soft items can't go with hard items.
+      
+        // DONE implement this
+        if((candidateItem.isSoft && hasHardItems()) || (candidateItem.isHard && hasSoftItems()) ) { return false; }
+        
+        // rule 3: Breakable items cant go with hard items.
+        // DONE implement this
+        if(candidateItem.isBreakable && hasHardItems() || candidateItem.isHard && hasBreakableItems()) { return false; }
+        
+               // rule 4: Perishables cant go with large items.
+        if(candidateItem.isPerishable && hasLargeItems() || candidateItem.isLarge && hasPerishableItems()) { return false; }
         
         
-        // rule 2: Soft items cant go with rigid items.
-        
-        // TODO implement this
-        
-        
-        // rule 3: Flexible items cant go with hard items.
-        
-        // TODO implement this
-        
-        
-        // rule 4: Perishables cant go with extra large items.
-        
-        // TODO implement this
+        // DONE implement this
         //hidden rule dont use
         // rule 5: light items cant go with heavy items
         // NOTE do not modify the rest of this method
 
         // nothing else to check - passed all compatibility filters
+            
         return true ;
 
         }   // end areCompatible()
@@ -669,9 +670,9 @@ public final class GroceryBag implements Comparable<GroceryBag>
 
         checkIntegrity() ;
         
-        // TODO implement this - do all the work in a single return statement
+        // DONE implement this - do all the work in a single return statement
         
-        return false ;  // STUB value - delete this comment
+        return (this.getRemainingSpaceAvailable() == 0 || this.getRemainingWeightAvailable() == 0);  // STUB value - delete this comment
 
         }   // end isFull()
 
@@ -925,32 +926,40 @@ public final class GroceryBag implements Comparable<GroceryBag>
         {
         
         // NOTE you must use either increment/decrement or composite operators as appropriate
-        
 
+        
         // capacity fields
 
-        // TODO adjust remaining space and weight counters
-        
+        // DONE adjust remaining space and weight counters
+        remainingWeightAvailable -= newItem.weight.weightValue;
+        remainingSpaceAvailable -= newItem.size.sizeValue;
 
         // compatibility fields
 
-        // TODO adjust breakability, perishability, and rigidity counters
+        // DONE adjust breakability, perishability, and rigidity counters
 
+        breakableItemCount += (newItem.isBreakable) ? 1 : 0;
+        perishableItemCount += (newItem.isPerishable) ? 1 : 0;
+        rigidItemCount += (newItem.isRigid) ? 1 : 0;
         
         // sizes
 
-        // TODO adjust small and large counters
+        // DONE adjust small and large counters
 
+        smallItemCount += (newItem.isSmall) ? 1 : 0; 
+        largeItemCount += (newItem.isLarge) ? 1 : 0;
         
         // weights
 
-        // TODO adjust light and heavy counters
-
+        // DONE adjust light and heavy counters
+        lightItemCount += (newItem.isLight) ? 1 : 0;
+        heavyItemCount += (newItem.isHeavy) ? 1 : 0;
         
         // firmnesses
-
-        // TODO adjust soft and hard counters
-
+        
+        // DONE adjust soft and hard counters
+        softItemCount += (newItem.isSoft) ? 1 : 0;
+        hardItemCount += (newItem.isHard) ? 1 : 0;
         }   // end accountForAddedItem()
 
 
@@ -965,31 +974,35 @@ public final class GroceryBag implements Comparable<GroceryBag>
         
         // NOTE you must use either increment/decrement or composite operators as appropriate
         
-
-        // capacity fields
-
-        // TODO adjust remaining space and weight counters
-        
+        // DONE adjust remaining space and weight counters
+        remainingWeightAvailable += removedItem.weight.weightValue;
+        remainingSpaceAvailable += removedItem.size.sizeValue;
 
         // compatibility fields
 
-        // TODO adjust breakability, perishability, and rigidity counters
+        // DONE adjust breakability, perishability, and rigidity counters
 
+        breakableItemCount -= (removedItem.isBreakable) ? 1 : 0;
+        perishableItemCount -= (removedItem.isPerishable) ? 1 : 0;
+        rigidItemCount -= (removedItem.isRigid) ? 1 : 0;
         
         // sizes
 
-        // TODO adjust small and large counters
+        // DONE adjust small and large counters
 
-        
+        smallItemCount -= (removedItem.isSmall) ? 1 : 0; 
+        largeItemCount -= (removedItem.isLarge) ? 1 : 0;
         // weights
 
-        // TODO adjust light and heavy counters
-
+        // DONE adjust light and heavy counters
+        lightItemCount -= (removedItem.isLight) ? 1 : 0;
+        heavyItemCount -= (removedItem.isHeavy) ? 1 : 0;
         
         // firmnesses
-
-        // TODO adjust soft and hard counters
-
+        
+        // DONE adjust soft and hard counters
+        softItemCount -= (removedItem.isSoft) ? 1 : 0;
+        hardItemCount -= (removedItem.isHard) ? 1 : 0;
         }   // end accountForRemovedItem()
 
 
@@ -1020,14 +1033,10 @@ public final class GroceryBag implements Comparable<GroceryBag>
      *
      * @return {@code true} if there's room for this grocery item, {@code false} otherwise
      */
-    private boolean hasCapacity( final GroceryItem candidateItem )
-        {
-
-        // TODO implement this - do the test(s) in the return statement
-
-        return true ;   // STUB value - delete this comment
-
-        }   // end hasCapacity()
+    private boolean hasCapacity( final GroceryItem candidateItem ) {
+    //DONE
+        return (remainingSpaceAvailable - candidateItem.size.sizeValue) < 0 ;   
+    }   // end hasCapacity()
 
 
     /**
@@ -1035,8 +1044,7 @@ public final class GroceryBag implements Comparable<GroceryBag>
      * <p>
      * note: this doesn't affect the contents of the {@code groceryBag}
      */
-    private void initializeCounters()
-        {
+    private void initializeCounters() {
         
         // NOTE do not modify this method
         
@@ -1073,8 +1081,7 @@ public final class GroceryBag implements Comparable<GroceryBag>
      * @throws InvalidSpecificationException
      *     if any limit is too small
      */
-    private static void validateLimits() throws InvalidSpecificationException
-        {
+    private static void validateLimits() throws InvalidSpecificationException {
         
         // NOTE do not modify this method
         
