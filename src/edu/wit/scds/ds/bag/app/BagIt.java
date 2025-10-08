@@ -193,10 +193,12 @@ public final class BagIt
                 		throw new BaggingException("Bagging area did not accept new bag.");
                 	}
              // TODO if the newBag doesn't accept the item, throw a BaggingException. DONE
-                	boolean added = newBag.add(item);
-                	if(!added) {
+                	try{
+                		newBag.add(item);
+                	}catch (Exception e) {
                 		throw new BaggingException("Bag couldn't accept item.");
                 	}
+                	baggedIn = newBag;
             }
                
             
