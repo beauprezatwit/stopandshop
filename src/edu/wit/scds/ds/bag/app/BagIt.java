@@ -199,7 +199,7 @@ public final class BagIt
                 		throw new BaggingException("Bag couldn't accept item.");
                 	}
                 	baggedIn = newBag;
-            }
+            } 
                
             
 
