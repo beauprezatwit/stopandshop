@@ -1035,7 +1035,7 @@ public final class GroceryBag implements Comparable<GroceryBag>
      */
     private boolean hasCapacity( final GroceryItem candidateItem ) {
     //DONE
-        return (remainingSpaceAvailable - candidateItem.size.sizeValue) < 0 ;   
+        return (remainingSpaceAvailable - candidateItem.size.sizeValue) >= 0 && (remainingWeightAvailable - candidateItem.weight.weightValue) >= 0;
     }   // end hasCapacity()
 
 
